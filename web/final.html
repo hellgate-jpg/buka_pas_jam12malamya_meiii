@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    background: radial-gradient(circle at top, #1a001a, #0d0d0d);
+    color: #ffb6c1;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    text-align: center;
+    overflow-x: hidden;
+    opacity: 0;
+    animation: fadePage 2s ease forwards;
+}
+
+@keyframes fadePage {
+    to { opacity: 1; }
+}
+
+.box {
+    padding: 30px;
+    background: rgba(255, 105, 180, 0.08);
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 30px rgba(255, 105, 180, 0.2);
+    max-width: 400px;
+    transform: translateY(30px);
+    animation: rise 1.5s ease forwards;
+    margin: 40px 0;
+}
+
+@keyframes rise {
+    to { transform: translateY(0); }
+}
+
+h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 42px;
+}
+
+#text {
+    white-space: pre-line;
+    line-height: 1.7;
+    margin-top: 15px;
+}
+
+#text::after {
+    content: "|";
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%,100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* BUTTON */
+button {
+    margin-top: 15px;
+    padding: 12px 22px;
+    background: linear-gradient(45deg, #ff69b4, #ff1493);
+    border: none;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 0 15px #ff69b4;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 0.5s;
+}
+
+.showBtn {
+    opacity: 1;
+    transform: translateY(0);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
+
+/* RESPONSE */
+#response {
+    margin-top: 10px;
+    opacity: 0;
+    transform: translateY(10px) scale(0.9);
+    transition: 0.5s;
+}
+
+/* FINAL TEXT */
+.final {
+    margin-top: 15px;
+    font-size: 14px;
+    opacity: 0;
+    animation: fadeFinal 2s ease forwards;
+    animation-delay: 4s;
+}
+
+@keyframes fadeFinal {
+    to { opacity: 1; }
+}
+</style>
+</head>
+
+<body onclick="startMusic()">
+
+<div class="box">
+    <h1>FOR YOU💖</h1>
+
+    <p id="text"></p>
+
+    <div class="final">— 💖 —</div>
+
+    <button id="interactBtn" onclick="showResponse()">senyum dulu lahhh😊</button>
+    <p id="response"></p>
+
+    <button id="backBtn" onclick="goBack()">Kembali</button>
+    <button id="videoBtn" onclick="goVideo()">lanjut ya 💖</button>
+</div>
+
+<audio id="musik" loop>
+<source src="musik.mp3" type="audio/mp3">
+</audio>
+
+<script>
+const message = `I know we just a friend...
+
+Hope u always be allright,
+semoga kamu tetap menjadi yang terbaik dan selalu berkembang
+dalam segala hal yang kamu harapkan,
+aku tau kamu sebenarnya bisa kok tpi kehalang malas aja kan😄
+becandaaaa 😄😄😄😄,
+
+Gak perlu dibales apa-apa kok,
+aku cuma pengen kamu tau aja...
+
+kalau kamu itu spesial 😊💖
+
+Santai aja ya,
+,
+gak usah canggung di kelas besokkk wkwkwk😄`;
+
+let i = 0;
+
+function typeText() {
+    if (i < message.length) {
+        document.getElementById("text").innerHTML += message.charAt(i);
+        i++;
+        setTimeout(typeText, 35);
+    } else {
+        setTimeout(() => {
+            document.getElementById("interactBtn").classList.add("showBtn");
+            document.getElementById("backBtn").classList.add("showBtn");
+            document.getElementById("videoBtn").classList.add("showBtn");
+        }, 500);
+    }
+}
+
+typeText();
+
+// INTERAKSI (bisa diklik berkali-kali, smooth)
+function showResponse() {
+    const responses = [
+        "nah gitu dong 😊💖",
+        "senyummu manis banget 😄💖",
+        "semangattttttttt ✨",
+        "itu diaa, senyum favorit 😆💖",
+        "bikin hari jadi lebih bagus 😊",
+        "jadi makin cerah nih 😄✨",
+        "senyum terus ya 😊💖",
+        "itu dia yang aku tunggu 😏",
+        "niceee 😆💖",
+        "jangan berhenti senyum ya 😊",
+        "wahh lucu banget 😄💖",
+        "senyumnya bikin adem 😊",
+        "good mood detected 😏✨"
+    ];
+
+    const res = document.getElementById("response");
+    const randomText = responses[Math.floor(Math.random() * responses.length)];
+
+    // animasi ulang tiap klik
+    res.style.opacity = "0";
+    res.style.transform = "translateY(10px) scale(0.9)";
+
+    setTimeout(() => {
+        res.innerHTML = randomText;
+        res.style.opacity = "1";
+        res.style.transform = "translateY(0) scale(1)";
+    }, 150);
+}
+
+// BACK
+function goBack() {
+    window.location.href = "memory.html";
+}
+function goVideo() {
+    window.location.href = "video.html";
+}
+</script>
+
+</body>
+</html>

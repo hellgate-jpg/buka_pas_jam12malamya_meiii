@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About You 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    background: radial-gradient(circle at top, #1a001a, #0d0d0d);
+    color: #ffb6c1;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    text-align: center;
+    overflow-x: hidden;
+    opacity: 0;
+    animation: fadePage 2s ease forwards;
+}
+
+@keyframes fadePage {
+    to { opacity: 1; }
+}
+
+.box {
+    margin: 40px 0;
+    padding: 30px;
+    background: rgba(255, 105, 180, 0.08);
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 30px rgba(255, 105, 180, 0.2);
+    max-width: 400px;
+}
+
+h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 40px;
+}
+
+/* TYPING */
+#text {
+    white-space: pre-line;
+    line-height: 1.7;
+    margin-top: 15px;
+}
+
+#text::after {
+    content: "|";
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%,100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* BUTTON */
+button {
+    margin-top: 20px;
+    padding: 12px 22px;
+    background: linear-gradient(45deg, #ff69b4, #ff1493);
+    border: none;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 0 15px #ff69b4;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 0.5s;
+}
+
+.showBtn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* EXTRA */
+#extra {
+    margin-top: 10px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: 0.5s;
+}
+</style>
+</head>
+
+<body onclick="startMusic()">
+
+<div class="box">
+    <h1>HEI MEI 💖</h1>
+
+    <p id="text"></p>
+
+    <button id="extraBtn" onclick="showExtra()">klik ini deh 😏</button>
+    <p id="extra"></p>
+
+    <button id="nextBtn" onclick="goNext()">Lanjut lagi 💖</button>
+</div>
+
+<audio id="musik" loop>
+<source src="musik.mp3" type="audio/mp3">
+</audio>
+
+<script>
+const message = `aku gak tau kamu sadar atau nggak...
+
+tapi ada beberapa hal kecil dari kamu
+yang entah kenapa selalu keinget 😄
+
+cara kamu ngobrol santai itu...
+
+cara kamu ketawa...
+
+dan cara kamu bikin suasana jadi lebih menarik 😌
+
+hal kecil sih...
+
+tapi cukup buat jadi beda😊`;
+
+let i = 0;
+
+function typeText() {
+    if (i < message.length) {
+        document.getElementById("text").innerHTML += message.charAt(i);
+        i++;
+        setTimeout(typeText, 35);
+    } else {
+        setTimeout(() => {
+            document.getElementById("extraBtn").classList.add("showBtn");
+            document.getElementById("nextBtn").classList.add("showBtn");
+        }, 500);
+    }
+}
+
+typeText();
+
+// INTERAKSI KECIL
+function showExtra() {
+    const extra = document.getElementById("extra");
+    extra.innerHTML = "aneh sih... tapi aku suka aja 😄";
+    extra.style.opacity = "1";
+    extra.style.transform = "translateY(0)";
+}
+
+// NEXT KE FINAL
+function goNext() {
+    window.location.href = "final.html";
+}
+
+const audio = document.getElementById("musik");
+
+// ambil posisi terakhir
+const savedTime = localStorage.getItem("musicTime");
+if (savedTime) {
+    audio.currentTime = savedTime;
+}
+
+// ⛔ ini penting: play HARUS dari interaksi user
+function startMusic() {
+    audio.play();
+}
+
+// simpan posisi tiap detik
+setInterval(() => {
+    localStorage.setItem("musicTime", audio.currentTime);
+}, 1000);
+</script>
+
+</body>
+</html>
