@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Special For You 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    background: radial-gradient(circle at top, #1a001a, #000);
+    color: #ffb6c1;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+}
+
+/* PAGE */
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* BOX */
+.box {
+    text-align: center;
+    padding: 20px;
+    background: rgba(255, 105, 180, 0.08);
+    border-radius: 25px;
+    box-shadow: 0 0 30px rgba(255, 105, 180, 0.2);
+    transition: 1s;
+}
+
+/* VIDEO */
+video {
+    width: 320px;
+    border-radius: 20px;
+    box-shadow: 0 0 25px #ff69b4;
+}
+
+/* END SCREEN */
+#ending {
+    position: absolute;
+    inset: 0;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    opacity: 0;
+    pointer-events: none;
+    transition: 2s;
+}
+
+/* END TEXT */
+#endingText {
+    font-family: 'Dancing Script', cursive;
+    font-size: 42px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 2s;
+}
+
+/* SUBTEXT */
+#subText {
+    margin-top: 15px;
+    opacity: 0;
+    transition: 3s;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="box" id="videoBox">
+    <h2>Ini ada sesuatu buat kamu 💖</h2>
+
+    <video id="vid" controls autoplay>
+        <source src="video.mp4" type="video/mp4">
+    </video>
+</div>
+
+</div>
+
+<!-- ENDING -->
+<div id="ending">
+
+    <div id="endingText">
+        Happy Birthday Meii 💖
+    </div>
+
+    <div id="subText">
+        hope everything will be allright😊
+    </div>
+
+</div>
+
+<script>
+const vid = document.getElementById("vid");
+const ending = document.getElementById("ending");
+const endingText = document.getElementById("endingText");
+const subText = document.getElementById("subText");
+
+// pas video selesai
+vid.addEventListener("ended", () => {
+
+    // fade video keluar
+    document.getElementById("videoBox").style.opacity = "0";
+
+    setTimeout(() => {
+
+        // munculin layar ending
+        ending.style.opacity = "1";
+
+        setTimeout(() => {
+            endingText.style.opacity = "1";
+            endingText.style.transform = "translateY(0)";
+        }, 1000);
+
+        setTimeout(() => {
+            subText.style.opacity = "1";
+        }, 2500);
+
+    }, 1000);
+
+});
+</script>
+
+</body>
+</html>
