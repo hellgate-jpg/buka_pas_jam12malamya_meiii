@@ -68,44 +68,5 @@ function masuk() {
     window.location.href = "main.html";
 }
 </script>
-<script>
-const openDate = new Date("May 15, 2030 00:00:00").getTime();
-const now = new Date().getTime();
-
-if (now < openDate) {
-
-    document.body.innerHTML = `
-    <div style="
-        margin:0;
-        height:100vh;
-        background: radial-gradient(circle at top, #1a001a, #000);
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        flex-direction:column;
-        color:#ffb6c1;
-        font-family:Poppins;
-        text-align:center;
-        overflow:hidden;
-    ">
-
-        <h1 style="
-            font-size:50px;
-            margin-bottom:10px;
-        ">
-            belum waktunya 💖
-        </h1>
-
-        <p style="
-            opacity:0.8;
-            font-size:18px;
-        ">
-            buka nanti yaa 😊
-        </p>
-
-    </div>
-    `;
-}
-</script>
 </body>
 </html>
